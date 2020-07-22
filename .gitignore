@@ -1,0 +1,4 @@
+*.org
+*/.idea
+*/.nrepl-*
+out
