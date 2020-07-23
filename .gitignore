@@ -2,3 +2,6 @@
 */.idea
 */.nrepl-*
 out
+node_modules
+package-lock.json
+.cljs_node_repl
