@@ -5,10 +5,12 @@
                  ;; [org.clojure/clojurescript "1.10.741"]
                  [org.clojure/clojurescript "1.10.597"]
 
-
                  ;; This is the jar I'm trying to build.
+                 [cljsjs/bignumber "9.0.0-0"]
                  [cljsjs/complex "2.0.11-0"]
                  [cljsjs/odex "2.0.4-0"]
+                 [cljsjs/quaternion "1.1.0-0"]
+                 [cljsjs/bigfraction "4.0.12-0"]
                  [cljsjs/fraction "4.0.12-0"]
                  [cljsjs/decimal "10.2.0-0"]
                  [cljsjs/bn "4.11.8-0"]]

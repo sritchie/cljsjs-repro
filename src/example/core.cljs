@@ -1,32 +1,66 @@
 (ns example.core
   (:require [cljsjs.bn]
-            [cljsjs.complex]
-            [cljsjs.decimal]
-            [cljsjs.odex]
-            [cljsjs.fraction]))
+            ["bignumber.js" :as BigNumber]
+            ["complex.js" :as Complex]
+            ["decimal.js" :as d]
+            ["fraction.js" :as frac]
+            ["fraction.js/bigfraction.js" :as bf]
+            [quaternion :as Quaternion]
+            [odex :as o]))
 
 (extend-protocol IEquiv
-  js/Decimal
+  d
   (-equiv [this other]
     (.equals this other))
 
-  js/Complex
+  ;; frac
+  ;; (-equiv [this other]
+  ;;   (.equals this other))
+
+  bf
+  (-equiv [this other]
+    (.equals this other))
+
+  BigNumber
+  (-equiv [this other]
+    (.isEqualTo this other))
+
+  Complex
+  (-equiv [this other]
+    (.equals this other))
+
+  Quaternion
   (-equiv [this other]
     (.equals this other)))
 
 (defn complex
   [re im]
-  (js/Complex. re))
+  (Complex. re im))
 
-(defn fraction
+(defn bignum [x]
+  (BigNumber. x))
+
+(defn quaternion
+  [w x y z]
+  (Quaternion. w x y z))
+
+;; (defn fraction
+;;   [num denom]
+;;   (frac. num denom))
+
+(= (quaternion 2 4 6 8)
+   (.add (quaternion 1 2 3 4)
+         (quaternion 1 2 3 4)))
+
+(defn bigfraction
   [num denom]
-  (js/Fraction. num denom))
+  (bf. num denom))
 
 (defn decimal [x]
-  (js/Decimal. x))
+  (d. x))
 
 (defn routine [x y] y)
 
 (defn solve-test []
-  (let [s (js/odex.Solver. 1)]
+  (let [s (o/Solver. 1)]
     (.solve s routine 0 #js [1] 1)))
